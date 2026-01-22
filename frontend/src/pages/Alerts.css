@@ -1,0 +1,89 @@
+/* PAGE */
+.alerts-page {
+  padding: 24px;
+  background: #f8fafc; /* soft dashboard background */
+}
+
+/* UNREAD BADGE */
+.unread-badge {
+  margin-bottom: 18px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #334155;
+}
+
+/* ALERT CARD */
+.alert-card {
+  background: #ffffff;
+  padding: 16px 18px;
+  border-radius: 10px;
+  margin-bottom: 14px;
+  border-left: 6px solid gray;
+
+  /* Rich layered shadow */
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.06),
+    0 10px 24px rgba(0, 0, 0, 0.08);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    opacity 0.25s ease;
+}
+
+/* HOVER EFFECT */
+.alert-card:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 6px 14px rgba(0, 0, 0, 0.08),
+    0 18px 36px rgba(0, 0, 0, 0.12);
+}
+
+/* ALERT TYPES */
+.alert-card.danger {
+  border-color: #dc2626;
+}
+
+.alert-card.warning {
+  border-color: #f59e0b;
+}
+
+.alert-card.info {
+  border-color: #2563eb;
+}
+
+/* READ STATE */
+.alert-card.read {
+  opacity: 0.55;
+}
+
+/* BUTTON */
+.alert-card button {
+  margin-top: 10px;
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 600;
+
+  background: #96258b;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+/* BUTTON HOVER */
+.alert-card button:hover {
+  background: #1e293b;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* BUTTON ACTIVE */
+.alert-card button:active {
+  transform: scale(0.97);
+}

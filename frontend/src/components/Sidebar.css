@@ -1,0 +1,63 @@
+
+.sidebar nav a {
+  display: block;
+  padding: 10px 12px;
+  margin-bottom: 8px;
+  border-radius: 9px;
+  color:black;
+  text-decoration: none;
+}
+
+.sidebar nav a.active {
+  background-color: #2563eb;
+}
+
+.sidebar nav a:hover {
+  background-color: #8d33cd;
+}
+
+.sidebar .logout {
+  background: linear-gradient(180deg, #3e73cd, #f7efef);
+}
+.logout {
+  margin-top: 40px;
+  padding: 10px;
+  width: 100%;
+  border: none;
+  border-radius: 6px;
+  background: linear-gradient(180deg, #bd18ba, white);
+  color: black;
+  cursor: pointer;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+
+  box-shadow:
+    0 4px 10px rgba(202, 61, 227, 0.35),
+    inset 0 1px 0 rgba(151, 48, 160, 0.1);
+
+  transition:
+    background 0.25s ease,
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.logout:hover {
+  background: linear-gradient(180deg, #d4d4dd, #7a4fb3);
+  transform: translateY(-1px);
+  box-shadow:
+    0 6px 14px rgba(127, 29, 29, 0.45);
+}
+
+.logout:active {
+  transform: translateY(0);
+  box-shadow:
+    0 3px 8px rgba(127, 29, 29, 0.35);
+}
+
+.logout:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 3px rgba(185, 28, 28, 0.35),
+    0 6px 14px rgba(127, 29, 29, 0.45);
+}
+
