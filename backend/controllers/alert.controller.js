@@ -2,12 +2,10 @@
 import Alert from "../models/alert.model.js";
 import Expense from "../models/sw.expense.model.js";
 
+/* ================= GENERATE ALERTS ================= */
 export const generateAlertsForUser = async (userId) => {
   const expenses = await Expense.find({ userRef: userId });
-
   if (!expenses.length) return;
-
-  const alerts = [];
 
   const totalSpent = expenses.reduce(
     (sum, e) => sum + Number(e.amount),
@@ -16,20 +14,26 @@ export const generateAlertsForUser = async (userId) => {
 
   const BUDGET = 20000;
 
-  
+  /* ---------- BUDGET ALERT ---------- */
   if (totalSpent >= BUDGET * 0.9) {
-    alerts.push({
-      userRef: userId,
-      title: "Budget Alert",
-      message: `You have spent ₹${totalSpent}. You are near your budget limit.`,
-      type: "danger",
-      isRead: false
-    });
+    const key = "budget-warning";
+
+    const exists = await Alert.findOne({ userRef: userId, key });
+
+    if (!exists) {
+      await Alert.create({
+        userRef: userId,
+        key,
+        title: "Budget Alert",
+        message: `You have spent ₹${totalSpent}. You are near your budget limit.`,
+        type: "danger", // ✅ enum-safe
+        isRead: false
+      });
+    }
   }
 
-  
+  /* ---------- CATEGORY ALERT ---------- */
   const categoryMap = {};
-
   expenses.forEach((e) => {
     categoryMap[e.category] =
       (categoryMap[e.category] || 0) + Number(e.amount);
@@ -37,54 +41,50 @@ export const generateAlertsForUser = async (userId) => {
 
   for (const cat in categoryMap) {
     if (categoryMap[cat] > 8000) {
-      alerts.push({
-        userRef: userId,
-        title: "Category Overspending",
-        message: `${cat} spending crossed ₹${categoryMap[cat]}`,
-        type: "warning",
-        isRead: false
-      });
+      const key = `category-${cat}`;
+
+      const exists = await Alert.findOne({ userRef: userId, key });
+
+      if (!exists) {
+        await Alert.create({
+          userRef: userId,
+          key,
+          title: "Category Overspending",
+          message: `${cat} spending crossed ₹${categoryMap[cat]}`,
+          type: "warning",
+          isRead: false
+        });
+      }
     }
   }
 
-  
+  /* ---------- UNUSUAL EXPENSE ---------- */
   const avg = totalSpent / expenses.length;
 
-  expenses.forEach((e) => {
+  for (const e of expenses) {
     if (e.amount > avg * 2) {
-      alerts.push({
-        userRef: userId,
-        title: "Unusual Expense",
-        message: `High expense of ₹${e.amount} detected in ${e.category}`,
-        type: "danger",
-        isRead: false
-      });
+      const key = `unusual-${e._id}`;
+
+      const exists = await Alert.findOne({ userRef: userId, key });
+
+      if (!exists) {
+        await Alert.create({
+          userRef: userId,
+          key,
+          title: "Unusual Expense",
+          message: `High expense of ₹${e.amount} detected in ${e.category}`,
+          type: "danger",
+          isRead: false
+        });
+      }
     }
-  });
-
-  
-  alerts.push({
-    userRef: userId,
-    title: "Monthly Summary",
-    message: `You spent ₹${totalSpent} this month.`,
-    type: "info",
-    isRead: false
-  });
-
-  // 🔥 IMPORTANT: RESET OLD ALERTS
-  await Alert.deleteMany({ userRef: userId });
-  await Alert.insertMany(alerts);
+  }
 };
 
-
+/* ================= GET ALERTS ================= */
 export const getAlerts = async (req, res) => {
   try {
-    const userId = req.user.userId;
-
-    // 🔥 AUTO GENERATE ALERTS
-    await generateAlertsForUser(userId);
-
-    const alerts = await Alert.find({ userRef: userId })
+    const alerts = await Alert.find({ userRef: req.user.userId })
       .sort({ isRead: 1, createdAt: -1 });
 
     res.json(alerts);
@@ -93,13 +93,8 @@ export const getAlerts = async (req, res) => {
   }
 };
 
-
+/* ================= MARK AS READ ================= */
 export const markAlertRead = async (req, res) => {
-  await Alert.findByIdAndUpdate(req.params.id, {
-    isRead: true
-  });
-
+  await Alert.findByIdAndUpdate(req.params.id, { isRead: true });
   res.json({ message: "Marked as read" });
 };
-
-

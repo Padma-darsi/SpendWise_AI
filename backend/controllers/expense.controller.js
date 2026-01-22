@@ -1,4 +1,5 @@
 import SW_Expense from "../models/sw.expense.model.js";
+import { generateAlertsForUser } from "./alert.controller.js";
 
 /* ---------- ADD EXPENSE ---------- */
 export const addExpense = async (req, res) => {
@@ -18,6 +19,9 @@ export const addExpense = async (req, res) => {
       note,
       expenseDate
     });
+
+    // 🔥 SAFE background alert generation
+    generateAlertsForUser(req.user.userId);
 
     return res.status(201).json({
       message: "Expense added successfully",
@@ -50,7 +54,6 @@ export const getUserExpenses = async (req, res) => {
   }
 };
 
-
 export const updateExpense = async (req, res) => {
   try {
     const updated = await SW_Expense.findOneAndUpdate(
@@ -62,6 +65,8 @@ export const updateExpense = async (req, res) => {
     if (!updated) {
       return res.status(404).json({ message: "Expense not found" });
     }
+
+    generateAlertsForUser(req.user.userId);
 
     res.json({ message: "Expense updated" });
   } catch (err) {
@@ -80,8 +85,14 @@ export const deleteExpense = async (req, res) => {
       return res.status(404).json({ message: "Expense not found" });
     }
 
+    generateAlertsForUser(req.user.userId);
+
     res.json({ message: "Expense deleted" });
   } catch (err) {
     res.status(500).json({ message: "Delete failed" });
   }
 };
+
+
+
+

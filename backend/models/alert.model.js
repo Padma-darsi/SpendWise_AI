@@ -7,6 +7,7 @@ const alertSchema = new mongoose.Schema(
       ref: "User",
       required: true
     },
+    key: { type: String, required: true },
     title: String,
     message: String,
     type: {
