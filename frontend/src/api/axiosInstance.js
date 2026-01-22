@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: "https://spend-wise-ai-phi.vercel.app/api"
+  baseURL: "https://spend-wise-ai-two.vercel.app/api"
 });
 
 axiosInstance.interceptors.request.use((config) => {
