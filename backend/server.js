@@ -16,7 +16,9 @@ const app = express();
 app.use(
   cors({
     origin: [
-      "https://spend-wise-ai-frontend.vercel.app"
+      "http://localhost:5173",
+    "https://spend-wise-ai-frontend.vercel.app",
+    "https://spend-wise-ai-frontend-j47gbl56m-padmas-projects-4d33d517.vercel.app"
     ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true
