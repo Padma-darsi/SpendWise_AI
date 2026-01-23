@@ -13,7 +13,15 @@ dotenv.config();
 const app = express();
 
 /* ---------- MIDDLEWARE ---------- */
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "https://spend-wise-ai-frontend.vercel.app"
+    ],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true
+  })
+);
 app.use(express.json());
 
 /* ---------- DATABASE CONNECTION ---------- */
