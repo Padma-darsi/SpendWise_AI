@@ -15,15 +15,29 @@ const app = express();
 /* ---------- MIDDLEWARE ---------- */
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-    "https://spend-wise-ai-frontend.vercel.app",
-    "https://spend-wise-ai-frontend-j47gbl56m-padmas-projects-4d33d517.vercel.app"
-    ],
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    origin: (origin, callback) => {
+      // allow requests with no origin (Postman, mobile apps)
+      if (!origin) return callback(null, true);
+
+      if (
+        origin.startsWith("http://localhost:") ||
+        origin.endsWith(".vercel.app")
+      ) {
+        return callback(null, true);
+      }
+
+      callback(new Error("Not allowed by CORS"));
+    },
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true
   })
 );
+
+// 👇 VERY IMPORTANT for preflight
+app.options("*", cors());
+
+
 app.use(express.json());
 
 /* ---------- DATABASE CONNECTION ---------- */
