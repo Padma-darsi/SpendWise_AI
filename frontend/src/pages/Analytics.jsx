@@ -25,6 +25,14 @@ export default function Analytics() {
     fetchExpenses();
   }, []);
 
+
+   useEffect(() => {
+    getAIBudgetPrediction()
+      .then(setAiData)
+      .catch(() => {});
+  }, []);
+
+
   const fetchExpenses = async () => {
     try {
       const res = await axiosInstance.get("/expenses");
@@ -94,12 +102,6 @@ export default function Analytics() {
     ([month, amount]) => ({ month, amount })
   );
 
-
- useEffect(() => {
-    getAIBudgetPrediction()
-      .then(setAiData)
-      .catch(() => {});
-  }, []);
 
 
   /* ================= UI ================= */
