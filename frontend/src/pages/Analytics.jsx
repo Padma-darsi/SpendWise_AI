@@ -12,12 +12,14 @@ import {
   YAxis
 } from "recharts";
 import "./analytics.css";
+import { getAIBudgetPrediction } from "../api/analytics";
 
 const COLORS = ["#6366f1", "#22c55e", "#f97316", "#ef4444", "#14b8a6"];
 
 export default function Analytics() {
   const [expenses, setExpenses] = useState([]); // ✅ MUST be array
   const [loading, setLoading] = useState(true);
+  const [aiData, setAiData] = useState(null);
 
   useEffect(() => {
     fetchExpenses();
@@ -92,6 +94,14 @@ export default function Analytics() {
     ([month, amount]) => ({ month, amount })
   );
 
+
+ useEffect(() => {
+    getAIBudgetPrediction()
+      .then(setAiData)
+      .catch(() => {});
+  }, []);
+
+
   /* ================= UI ================= */
 
   return (
@@ -159,6 +169,15 @@ export default function Analytics() {
           </ResponsiveContainer>
         )}
       </div>
+
+
+      {aiData && (
+        <div className="ai-card">
+          <h3>AI Budget Prediction</h3>
+          <p>Predicted Next Month Expense: ₹{aiData.predictedExpense}</p>
+          <p>Recommended Budget: ₹{aiData.recommendedBudget}</p>
+        </div>
+      )}
     </div>
   );
 }
