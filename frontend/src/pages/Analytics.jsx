@@ -12,7 +12,7 @@ import {
   YAxis
 } from "recharts";
 import "./analytics.css";
-import { predictBudget } from "../api/ai.api";
+import { predictBudget } from "../api/aiApi";
 
 const COLORS = ["#6366f1", "#22c55e", "#f97316", "#ef4444", "#14b8a6"];
 
