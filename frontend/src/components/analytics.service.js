@@ -1,4 +1,5 @@
+// api/analytics.js
 export const getAIBudgetPrediction = async () => {
-  const res = await axiosInstance.get("/ai/budget-prediction");
+  const res = await axiosInstance.get("/ai/predict-budget");
   return res.data;
 };
