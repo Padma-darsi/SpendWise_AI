@@ -180,8 +180,8 @@ useEffect(() => {
       {aiData && (
   <div className="ai-card">
     <h3>AI Budget Prediction</h3>
-    <p>Predicted Next Month Expense: ₹{aiData.predictedExpense}</p>
-    <p>Recommended Budget: ₹{aiData.recommendedBudget}</p>
+    <p>Predicted Next Month Expense: <span>₹{aiData.predictedExpense}</span></p>
+    <p>Recommended Budget: <span>₹{aiData.recommendedBudget}</span></p>
   </div>
 )}
 
