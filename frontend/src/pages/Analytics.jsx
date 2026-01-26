@@ -12,27 +12,21 @@ import {
   YAxis
 } from "recharts";
 import "./analytics.css";
-import { predictBudget } from "../api/aiApi";
+
 
 const COLORS = ["#6366f1", "#22c55e", "#f97316", "#ef4444", "#14b8a6"];
 
 export default function Analytics() {
   const [expenses, setExpenses] = useState([]); // ✅ MUST be array
   const [loading, setLoading] = useState(true);
-  const [aiData, setAiData] = useState(null);
-  const [aiError, setAiError] = useState(null);
-
+  
 
   useEffect(() => {
     fetchExpenses();
   }, []);
 
 
-useEffect(() => {
-  predictBudget()
-    .then(res => setAiData(res.data))
-    .catch(() => setAiError("AI prediction unavailable"));
-}, []);
+
 
 
 
@@ -176,15 +170,7 @@ useEffect(() => {
       </div>
 
 
-      {aiData && (
-  <div className="ai-card">
-    <h3>AI Budget Prediction</h3>
-    <p>Predicted Next Month Expense: ₹{aiData.predictedExpense}</p>
-    <p>Recommended Budget: ₹{aiData.recommendedBudget}</p>
-  </div>
-)}
-
-{aiError && <p className="no-data">{aiError}</p>}
+    
 
     </div>
   );
