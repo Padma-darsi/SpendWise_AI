@@ -12,7 +12,7 @@ import {
   YAxis
 } from "recharts";
 import "./analytics.css";
-import { getAIBudgetPrediction } from "../api/analytics";
+import { predictBudget } from "../api/ai.api";
 
 const COLORS = ["#6366f1", "#22c55e", "#f97316", "#ef4444", "#14b8a6"];
 
@@ -26,11 +26,13 @@ export default function Analytics() {
   }, []);
 
 
-   useEffect(() => {
-    getAIBudgetPrediction()
-      .then(setAiData)
-      .catch(() => {});
-  }, []);
+useEffect(() => {
+  predictBudget()
+    .then(setAiData)
+    .catch(() =>
+      setAiError("Not enough data for AI prediction")
+    );
+}, []);
 
 
   const fetchExpenses = async () => {
