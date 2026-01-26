@@ -30,9 +30,10 @@ export default function Analytics() {
 
 useEffect(() => {
   predictBudget()
-    .then(res => setAiData(res.data))
+    .then(data => setAiData(data))
     .catch(() => setAiError("AI prediction unavailable"));
 }, []);
+
 
 
 
