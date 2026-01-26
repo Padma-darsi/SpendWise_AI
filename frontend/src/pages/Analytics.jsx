@@ -20,6 +20,8 @@ export default function Analytics() {
   const [expenses, setExpenses] = useState([]); // ✅ MUST be array
   const [loading, setLoading] = useState(true);
   const [aiData, setAiData] = useState(null);
+  const [aiError, setAiError] = useState(null);
+
 
   useEffect(() => {
     fetchExpenses();
@@ -28,11 +30,10 @@ export default function Analytics() {
 
 useEffect(() => {
   predictBudget()
-    .then(setAiData)
-    .catch(() =>
-      setAiError("Not enough data for AI prediction")
-    );
+    .then(res => setAiData(res.data))
+    .catch(() => setAiError("AI prediction unavailable"));
 }, []);
+
 
 
   const fetchExpenses = async () => {
@@ -176,12 +177,15 @@ useEffect(() => {
 
 
       {aiData && (
-        <div className="ai-card">
-          <h3>AI Budget Prediction</h3>
-          <p>Predicted Next Month Expense: ₹{aiData.predictedExpense}</p>
-          <p>Recommended Budget: ₹{aiData.recommendedBudget}</p>
-        </div>
-      )}
+  <div className="ai-card">
+    <h3>AI Budget Prediction</h3>
+    <p>Predicted Next Month Expense: ₹{aiData.predictedExpense}</p>
+    <p>Recommended Budget: ₹{aiData.recommendedBudget}</p>
+  </div>
+)}
+
+{aiError && <p className="no-data">{aiError}</p>}
+
     </div>
   );
 }
