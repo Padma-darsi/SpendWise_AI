@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import ExpenseTable from "../components/ExpenseTable";
 import { getExpenses, addExpense, deleteExpense,updateExpense } from "../api/expenseApi";
-import '../styles/layout.css'
+import './Expenses.css'
 
 
 export default function Expenses() {
@@ -88,53 +88,69 @@ const handleDelete = async (id) => {
 
   return (
     <div className="expenses-page">
-      <h2>Expenses</h2>
-
-      {/* FORM CARD */}
-      <div className="expense-card">
-        <form className="expense-form" onSubmit={handleAddExpense}>
-          <input
-            name="title"
-            placeholder="Title"
-            value={form.title}
-            onChange={handleChange}
-            required
-          />
-
-          <input
-            name="category"
-            placeholder="Category"
-            value={form.category}
-            onChange={handleChange}
-            required
-          />
-
-          <input
-            type="number"
-            name="amount"
-            placeholder="Amount"
-            value={form.amount}
-            onChange={handleChange}
-            required
-          />
-
-          <input
-            type="date"
-            name="date"
-            value={form.date}
-            onChange={handleChange}
-            required
-          />
-
-          <button>Add Expense</button>
-        </form>
-      </div>
-
-      {/* TABLE CARD */}
-      <div className="expense-card">
-        <ExpenseTable expenses={expenses}  onEdit={handleEdit}
-                                   onDelete={handleDelete}/>
-      </div>
+    
+    {/* PAGE INTRO / AWARENESS */}
+    <div className="expenses-intro">
+      <h2>Expense Management</h2>
+     
     </div>
-  );
+
+    {/* ADD / EDIT FORM */}
+    <div className="expense-card">
+      <h3 className="section-title">
+        {editingId ? "Edit Expense" : "Add New Expense"}
+      </h3>
+
+      <form className="expense-form" onSubmit={handleAddExpense}>
+        <input
+          name="title"
+          placeholder="Expense Title"
+          value={form.title}
+          onChange={handleChange}
+          required
+        />
+
+        <input
+          name="category"
+          placeholder="Category"
+          value={form.category}
+          onChange={handleChange}
+          required
+        />
+
+        <input
+          type="number"
+          name="amount"
+          placeholder="Amount"
+          value={form.amount}
+          onChange={handleChange}
+          required
+        />
+
+        <input
+          type="date"
+          name="date"
+          value={form.date}
+          onChange={handleChange}
+          required
+        />
+
+        <button type="submit">
+          {editingId ? "Update Expense" : "Add Expense"}
+        </button>
+      </form>
+    </div>
+
+    {/* TABLE */}
+    <div className="expense-card">
+      <h3 className="section-title">Expense History</h3>
+
+      <ExpenseTable
+        expenses={expenses}
+        onEdit={handleEdit}
+        onDelete={handleDelete}
+      />
+    </div>
+  </div>
+);
 }

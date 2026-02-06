@@ -17,38 +17,24 @@ import { predictBudget } from "../api/aiApi";
 const COLORS = ["#6366f1", "#22c55e", "#f97316", "#ef4444", "#14b8a6"];
 
 export default function Analytics() {
-  const [expenses, setExpenses] = useState([]); // ✅ MUST be array
+  const [expenses, setExpenses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [aiData, setAiData] = useState(null);
   const [aiError, setAiError] = useState(null);
-
 
   useEffect(() => {
     fetchExpenses();
   }, []);
 
-
-useEffect(() => {
-  predictBudget()
-    .then(data => setAiData(data))
-    .catch(() => setAiError("AI prediction unavailable"));
-}, []);
-
-
-
+  useEffect(() => {
+    predictBudget()
+      .then(data => setAiData(data))
+      .catch(() => setAiError("AI prediction unavailable"));
+  }, []);
 
   const fetchExpenses = async () => {
     try {
       const res = await axiosInstance.get("/expenses");
-
-      /*
-        BACKEND RESPONSE:
-        {
-          count: number,
-          expenses: [...]
-        }
-      */
-
       setExpenses(Array.isArray(res.data.expenses) ? res.data.expenses : []);
     } catch (err) {
       console.error("Analytics fetch failed", err);
@@ -62,8 +48,6 @@ useEffect(() => {
     return <p className="analytics-loading">Loading analytics...</p>;
   }
 
-  /* ================= REAL CALCULATIONS ================= */
-
   const totalExpenses = expenses.length;
 
   const totalSpent = expenses.reduce(
@@ -71,7 +55,6 @@ useEffect(() => {
     0
   );
 
-  /* ===== CATEGORY ===== */
   const categoryMap = {};
   expenses.forEach((exp) => {
     if (!exp.category) return;
@@ -88,7 +71,6 @@ useEffect(() => {
       ? categoryData.reduce((a, b) => (b.value > a.value ? b : a)).name
       : "—";
 
-  /* ===== MONTHLY ===== */
   const monthMap = {};
   expenses.forEach((exp) => {
     if (!exp.expenseDate) return;
@@ -106,15 +88,10 @@ useEffect(() => {
     ([month, amount]) => ({ month, amount })
   );
 
-
-
-  /* ================= UI ================= */
-
   return (
     <div className="analytics-container">
       <h2 className="analytics-title">Analytics Dashboard</h2>
 
-      {/* ===== TOP CARDS ===== */}
       <div className="analytics-cards">
         <div className="analytics-card">
           <h4>Total Expenses</h4>
@@ -132,7 +109,6 @@ useEffect(() => {
         </div>
       </div>
 
-      {/* ===== CATEGORY PIE ===== */}
       <div className="analytics-section">
         <h3>Category-wise Spending</h3>
 
@@ -158,7 +134,6 @@ useEffect(() => {
         )}
       </div>
 
-      {/* ===== MONTHLY BAR ===== */}
       <div className="analytics-section">
         <h3>Monthly Spending</h3>
 
@@ -176,17 +151,21 @@ useEffect(() => {
         )}
       </div>
 
-
       {aiData && (
-  <div className="ai-card">
-    <h3>AI Budget Prediction</h3>
-    <p>Predicted Next Month Expense: <span>₹{aiData.predictedExpense}</span></p>
-    <p>Recommended Budget: <span>₹{aiData.recommendedBudget}</span></p>
-  </div>
-)}
+        <div className="ai-card">
+          <h3>AI Budget Prediction</h3>
+          <p>
+            Predicted Next Month Expense:
+            <span> ₹{aiData.predictedExpense}</span>
+          </p>
+          <p>
+            Recommended Budget:
+            <span> ₹{aiData.recommendedBudget}</span>
+          </p>
+        </div>
+      )}
 
-{aiError && <p className="no-data">{aiError}</p>}
-
+      {aiError && <p className="no-data">{aiError}</p>}
     </div>
   );
 }

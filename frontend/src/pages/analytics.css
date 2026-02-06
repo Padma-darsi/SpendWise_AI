@@ -1,3 +1,7 @@
+/* =========================
+   BASE STYLES
+========================= */
+
 .analytics-container {
   padding: 28px;
   background: #f4f6fa;
@@ -7,6 +11,7 @@
 .analytics-title {
   font-size: 26px;
   font-weight: 700;
+  color:#14627c;
   margin-bottom: 24px;
 }
 
@@ -60,8 +65,9 @@
   text-align: center;
 }
 
-
-/* ===== AI BUDGET PREDICTION ===== */
+/* =========================
+   AI CARD
+========================= */
 
 .ai-card {
   background: linear-gradient(135deg, #6366f1, #4f46e5);
@@ -72,9 +78,9 @@
   box-shadow: 0 12px 28px rgba(79, 70, 229, 0.35);
   position: relative;
   overflow: hidden;
+  margin-bottom: 120px;
 }
 
-/* subtle glow */
 .ai-card::before {
   content: "";
   position: absolute;
@@ -90,29 +96,60 @@
   font-size: 20px;
   font-weight: 700;
   margin-bottom: 18px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.ai-card h3::before {
-  content: "🤖";
-  font-size: 22px;
 }
 
 .ai-card p {
   font-size: 16px;
-  margin-bottom: 12px;
+  margin-bottom: 20px;
   color: #e0e7ff;
-}
-
-/* highlight values */
-.ai-card p:last-child {
-  margin-bottom: 0;
 }
 
 .ai-card p span {
   font-weight: 800;
   color: #ffffff;
   font-size: 20px;
+}
+
+/* =========================
+   FIX NAVBAR + SIDEBAR + SCROLL
+   (APPENDED ONLY)
+========================= */
+
+:root {
+  --navbar-height: 64px;
+  --sidebar-width: 260px;
+}
+
+.analytics-container {
+  margin-top: var(--navbar-height);
+  margin-left: var(--sidebar-width);
+  height: calc(100vh - var(--navbar-height));
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-bottom: 60px;
+}
+
+/* mobile */
+@media (max-width: 768px) {
+  .analytics-container {
+    margin-left: 0;
+    width: 100%;
+  }
+}
+
+/* =========================
+   🔧 AI CARD VISIBILITY FIX
+   (APPENDED ONLY – DO NOT TOUCH ABOVE)
+========================= */
+
+/* Push overlay behind content */
+.ai-card::before {
+  z-index: 0;
+}
+
+/* Bring text above overlay */
+.ai-card h3,
+.ai-card p {
+  position: relative;
+  z-index: 1;
 }

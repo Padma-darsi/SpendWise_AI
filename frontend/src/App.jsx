@@ -8,6 +8,8 @@ import Expenses from "./pages/Expenses";
 import Analytics from "./pages/Analytics";
 import Alerts from "./pages/Alerts";
 
+import Home from "./components/Home";
+
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
 
@@ -39,7 +41,8 @@ export default function App() {
                 <Sidebar />
                 <main className="content">
                   <Routes>
-                    <Route path="/" element={<Dashboard />} />
+                    <Route path="/" element={<Home />} /> 
+                    <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/expenses" element={<Expenses />} />
                     <Route path="/analytics" element={<Analytics />} />
                     <Route path="/alerts" element={<Alerts />} />

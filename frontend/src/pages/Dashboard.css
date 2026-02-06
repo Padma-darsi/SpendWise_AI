@@ -1,65 +1,95 @@
 /* ===============================
-   DASHBOARD PAGE WRAPPER
+   DASHBOARD PAGE LAYOUT - FIXED
 ================================ */
-
 .dashboard-page {
-  margin-left: 260px;
-  padding: 24px;
-  min-height: 100vh;
+  position: fixed;        /* fixed screen layout */
+  top: 80px;              /* below navbar */
+  left: 260px;            /* sidebar width */
+  right: 0;
+  bottom: 0;
+  padding: 24px 32px;
   background: linear-gradient(180deg, #f8fafc, #eef2f7);
+  display: flex;
+  flex-direction: column;
+  align-items: center;    /* center intro card */
+  overflow-y: auto;
   box-sizing: border-box;
+  gap: 40px;
 }
 
 /* ===============================
-   PAGE TITLE
+   INTRO CARD (CENTERED)
 ================================ */
+.dashboard-intro {
+  width: 100%;
+  max-width: 900px;
+  background: #ffffff;
+  padding: 28px 32px;
+  border-radius: 18px;
+  box-shadow: 0 18px 40px rgba(56, 89, 166, 0.12),
+              0 6px 14px rgba(15, 23, 42, 0.08);
+  text-align: center;
+  transition: all 0.3s ease;
+}
 
-.page-title {
-  font-size: 26px;
+.dashboard-intro:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 22px 48px rgba(56, 89, 166, 0.15),
+              0 8px 18px rgba(15, 23, 42, 0.12);
+}
+
+.dashboard-intro h2 {
+  font-size: 28px;
   font-weight: 700;
-  margin-bottom: 24px;
-  color: #0f172a;
-  margin-left: 40px;
-  letter-spacing: -0.3px;
+  color: #1f4e5f;
+  margin-bottom: 12px;
+}
+
+.dashboard-intro p {
+  font-size: 18px;
+  color: #475569;
+  line-height: 1.8;
 }
 
 /* ===============================
    DASHBOARD CARDS CONTAINER
 ================================ */
-
 .dashboard-cards {
   display: flex;
+  justify-content: space-between; /* distribute evenly */
   gap: 20px;
   width: 100%;
+  max-width: calc(100% - 12px);   /* ✅ FIX: right-side breathing space */
+  padding-right: 8px;             /* ✅ FIX: prevents last card overflow */
+  box-sizing: border-box;
+  flex-wrap: nowrap;
 }
 
 /* ===============================
-   CARD STYLING (STATIC PREMIUM UI)
+   CARD STYLING - PROFESSIONAL
 ================================ */
-
 .card {
-  flex: 1;
-  background: linear-gradient(180deg, #ffffff, #f8fafc);
-  border-radius: 18px; /* 🔥 Slightly more rounded */
-  padding: 30px;
-  margin-left: 40px;
+  flex: 1 1 0;                     /* ✅ FIX: equal width cards */
+  min-width: 0;                    /* ✅ FIX: prevents overflow */
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 28px 24px;
   position: relative;
   overflow: hidden;
-
-  border: 1px solid rgba(15, 23, 42, 0.06);
-
-  /* 🔥 PERMANENT PREMIUM SHADOW (from hover quality) */
-  box-shadow:
-    0 18px 40px rgba(56, 89, 166, 0.12),
-    0 6px 14px rgba(15, 23, 42, 0.08);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.12),
+              0 6px 14px rgba(15, 23, 42, 0.08);
+  transition: all 0.3s ease;
 }
 
-/* ===============================
-   CARD TITLE
-================================ */
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 44px rgba(56, 89, 166, 0.15),
+              0 8px 18px rgba(15, 23, 42, 0.12);
+}
 
 .card h4 {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
   color: #64748b;
   margin-bottom: 10px;
@@ -67,20 +97,12 @@
   letter-spacing: 0.9px;
 }
 
-/* ===============================
-   CARD VALUE
-================================ */
-
 .card p {
-  font-size: 30px;
+  font-size: 28px;
   font-weight: 800;
-  color: #020617;
+  color: #0f172a;
   line-height: 1.2;
 }
-
-/* ===============================
-   ACCENT BAR (STATIC ONLY)
-================================ */
 
 .card::before {
   content: "";
@@ -89,18 +111,12 @@
   left: 0;
   height: 6px;
   width: 100%;
-  background: linear-gradient(
-    90deg,
-    #2563eb,
-    #22c55e
-  );
+  background: linear-gradient(90deg, #2563eb, #22c55e);
 }
 
 /* ===============================
-   RESPONSIVE DESIGN (UNCHANGED)
+   RESPONSIVE
 ================================ */
-
-/* Large tablets & small laptops */
 @media (max-width: 1200px) {
   .dashboard-cards {
     flex-wrap: wrap;
@@ -111,18 +127,6 @@
   }
 }
 
-/* Tablets */
-@media (max-width: 992px) {
-  .page-title {
-    margin-left: 20px;
-  }
-
-  .card {
-    margin-left: 20px;
-  }
-}
-
-/* Mobile */
 @media (max-width: 768px) {
   .dashboard-page {
     margin-left: 0;
@@ -130,34 +134,21 @@
   }
 
   .dashboard-cards {
+    justify-content: center;
     gap: 16px;
   }
 
-  .page-title {
-    font-size: 20px;
-    margin-left: 0;
+  .dashboard-intro {
+    max-width: 100%;
+    padding: 20px;
   }
 
   .card {
-    margin-left: 0;
+    min-width: 200px;
+    padding: 20px;
   }
 
   .card p {
     font-size: 22px;
-  }
-}
-
-/* Small Mobile */
-@media (max-width: 480px) {
-  .card {
-    padding: 18px;
-  }
-
-  .card h4 {
-    font-size: 13px;
-  }
-
-  .card p {
-    font-size: 20px;
   }
 }

@@ -1,0 +1,212 @@
+/* ============================= */
+/* PAGE LAYOUT                  */
+/* ============================= */
+
+.expenses-page {
+  margin-left: 260px;            /* small gap beside sidebar */
+  padding: 85px 32px 24px;       /* more breathing room on right */
+  background: linear-gradient(180deg,#f8fafc,#eef2f7);
+  min-height: 100vh;
+}
+
+/* ============================= */
+/* HEADING                      */
+/* ============================= */
+
+.expenses-intro {
+  margin-bottom: 22px;
+}
+
+.expenses-intro h2 {
+  font-size: 28px;               /* increased */
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: 0.4px;
+  position: relative;
+  padding-left: 14px;
+}
+
+.expenses-intro h2::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 3px;
+  height: 28px;
+  width: 5px;
+  border-radius: 6px;
+  background: linear-gradient(180deg,#2563eb,#22c55e);
+}
+
+.expenses-intro p {
+  display: none;
+}
+
+/* ============================= */
+/* FLOATING CARDS               */
+/* ============================= */
+
+.expense-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 1px solid rgba(15,23,42,0.06);
+  box-shadow:
+    0 12px 30px rgba(15,23,42,0.1),
+    0 6px 14px rgba(15,23,42,0.06);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.expense-card:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 20px 44px rgba(15,23,42,0.14),
+    0 10px 20px rgba(15,23,42,0.1);
+}
+
+/* ============================= */
+/* CARD HEADINGS                */
+/* ============================= */
+
+.section-title {
+  font-size: 18px;               /* increased */
+  font-weight: 700;
+  color: #020617;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+/* ============================= */
+/* FORM STYLING                 */
+/* ============================= */
+
+.expense-form {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.expense-form input {
+  flex: 1;
+  min-width: 140px;
+  padding: 11px 12px;
+  font-size: 15px;
+  border-radius: 9px;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.expense-form input:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37,99,235,0.15);
+}
+
+.expense-form button {
+  padding: 11px 24px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 9px;
+  border: none;
+  background: linear-gradient(135deg,#2563eb,#22c55e);
+  color: #ffffff;
+  cursor: pointer;
+  box-shadow: 0 8px 18px rgba(37,99,235,0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.expense-form button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 26px rgba(37,99,235,0.4);
+}
+
+/* ============================= */
+/* TABLE STYLING                */
+/* ============================= */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;               /* increased */
+  background: #ffffff;
+}
+
+thead {
+  background: linear-gradient(180deg,#f8fafc,#eef2f7);
+}
+
+thead th {
+  text-align: left;
+  padding: 12px 14px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #1e293b;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+tbody td {
+  padding: 12px 14px;
+  font-size: 15px;
+  color: #334155;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+tbody tr {
+  transition: background 0.2s ease;
+}
+
+tbody tr:hover {
+  background: #f8fafc;
+}
+
+tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* ============================= */
+/* TABLE ACTION BUTTONS         */
+/* ============================= */
+
+table button {
+  padding: 7px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 7px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+table button:first-child {
+  background: hsl(204, 88%, 32%);
+  color: #e7edf0;
+  margin-right: 6px;
+}
+
+table button:last-child {
+  background: #d11515;
+  color: #f5efef;
+}
+
+table button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(51, 144, 180, 0.15);
+}
+
+/* ============================= */
+/* RESPONSIVE                   */
+/* ============================= */
+
+@media (max-width: 900px) {
+  .expenses-page {
+    margin-left: 0;
+    padding: 95px 16px 20px;
+  }
+
+  .expense-form {
+    flex-wrap: wrap;
+  }
+}
+

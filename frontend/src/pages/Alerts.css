@@ -2,6 +2,7 @@
 .alerts-page {
   padding: 24px;
   background: #f8fafc; /* soft dashboard background */
+  color: #010808;
 }
 
 /* UNREAD BADGE */
@@ -86,4 +87,40 @@
 /* BUTTON ACTIVE */
 .alert-card button:active {
   transform: scale(0.97);
+}
+
+/* =========================
+   DASHBOARD LAYOUT + SCROLL FIX
+   (APPENDED ONLY)
+========================= */
+
+:root {
+  --navbar-height: 64px;
+  --sidebar-width: 260px;
+}
+
+/* FIX: scrolling + layout */
+.alerts-page {
+  margin-top: var(--navbar-height);
+  margin-left: var(--sidebar-width);
+
+  height: calc(100vh - var(--navbar-height));
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  padding-bottom: 80px;
+}
+
+/* REDUCE CARD SIZE SLIGHTLY (professional density) */
+.alert-card {
+  padding: 12px 14px;
+  margin-bottom: 12px;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .alerts-page {
+    margin-left: 0;
+    width: 100%;
+  }
 }
