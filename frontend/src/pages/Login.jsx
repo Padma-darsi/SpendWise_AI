@@ -47,8 +47,10 @@ export default function Login() {
       <div className="floating-light light8"></div>
       <div className="floating-light light9"></div>
 
+      
+
       <div className="auth-card">
-        <h2>Welcome Back</h2>
+        <h2>SpendWise AI</h2>
 
         {/* Email */}
         <div className="input-wrapper">
