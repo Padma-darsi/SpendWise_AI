@@ -3,6 +3,10 @@
 
 **SpendWise_AI** is a secure full-stack MERN application that enables users to track, analyze, and optimize their financial activities using intelligent insights and real-time analytics.
 
+![Vercel](https://img.shields.io/badge/Frontend-Vercel-blue)
+![Render](https://img.shields.io/badge/Backend-Render-green)
+![MongoDB](https://img.shields.io/badge/Database-MongoDB-brightgreen)
+
 ---
 
 ## 🔥 Project Overview
@@ -168,3 +172,7 @@ https://spend-wise-ai-frontend.vercel.app/
 🖥️ **Frontend:** Deployed on Vercel  
 ⚙️ **Backend:** Deployed on Render  
 🗄️ **Database:** MongoDB Atlas
+
+## 📝 Contributing & Issues
+- Found a bug or want to request a feature? [Open an issue](https://github.com/Padma-darsi/SpendWise_AI/issues)
+- Want to contribute? Check the [contributing guidelines](https://github.com/Padma-darsi/SpendWise_AI/blob/master/CONTRIBUTING.md)
