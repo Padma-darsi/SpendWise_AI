@@ -100,9 +100,6 @@ Start the backend server:
 ```bash
 npm run dev
 ```
-
-The backend server will run on:
- http://localhost:5000
  
 ### 3️⃣ Frontend Setup
 ```bash
@@ -110,9 +107,6 @@ cd frontend
 npm install
 npm start
 ```
-
-The frontend application will run on:
- http://localhost:3000
  
 ### 🔄 Application Flow
 ```bash
@@ -173,6 +167,7 @@ https://spend-wise-ai-frontend.vercel.app/
 ⚙️ **Backend:** Deployed on Render  
 🗄️ **Database:** MongoDB Atlas
 
-## 📝 Contributing & Issues
-- Found a bug or want to request a feature? [Open an issue](https://github.com/Padma-darsi/SpendWise_AI/issues)
-- Want to contribute? Check the [contributing guidelines](https://github.com/Padma-darsi/SpendWise_AI/blob/master/CONTRIBUTING.md)
+## 📝 Contributing 
+- Fork and create a branch
+- Commit Changes
+- Open a pull request
