@@ -145,11 +145,13 @@ const handleDelete = async (id) => {
     <div className="expense-card">
       <h3 className="section-title">Expense History</h3>
 
+      <div className="expense-table-scroll">
       <ExpenseTable
         expenses={expenses}
         onEdit={handleEdit}
         onDelete={handleDelete}
       />
+    </div>
     </div>
   </div>
 );
