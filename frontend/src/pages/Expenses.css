@@ -233,11 +233,12 @@ table button:hover {
   display: block;
   height: 20px;
 }
-/* ============================= */
+/* =============================- */
 /* RESPONSIVE                   */
 /* ============================= */
 
-@media (max-width: 900px) {
+@media (max-width: 900px) 
+{
   .expenses-page {
     margin-left: 0;
     padding: 95px 16px 20px;
